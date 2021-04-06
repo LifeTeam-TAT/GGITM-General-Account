@@ -1,0 +1,82 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<h:form id="menuForm">
+		<style type="text/css">
+			.ui-menubar, .ui-menu-child, .ui-menu {
+				background: #00aab4 !important;
+				border: 1px solid #00aab5 !important;
+			}
+			.ui-menu .ui-menuitem-text {
+				color: white;
+			}
+			
+			.ui-menu .ui-state-hover {
+				background: #75807a !important;
+			}
+		</style>
+		<p:menubar autoDisplay="false" rendered="#{empty sessionScope.LoginUser ? false : true}" >
+			<p:menuitem action="home" ajax="false" immediate="true" value="Home" />
+			<p:submenu label="Setup Entry" rendered="#{LoginBean.hasPermission('Setup Entry')}">
+			<p:menuitem action="coaCodeEntry" ajax="false"  value="COA Code Entry" />
+			<p:menuitem action="branchCOACodeEntry" ajax="false" value="Branch COA Code Entry" />
+			<p:menuitem action="currencyCodeEntry" ajax="false" value="Currency Code Entry" />
+			<p:menuitem action="departmentCodeEntry" ajax="false"  value="Department Code Entry" />
+			<p:submenu label="Currency Rate Entry" >
+			<p:menuitem action="dailyRate" ajax="false" value="Daily Rate" />
+			<p:menuitem action="monthlyRate" ajax="false"  value="Monthly Rate" />
+			</p:submenu>
+			
+			<p:menuitem action="openingBalanceEntry" ajax="false" value="Opening Balance Entry" rendered="#{LoginBean.hasPermission('Setup Entry')}"/>
+			
+			<p:submenu label="Budget Entry">
+			<p:menuitem action="yearlyBudgetEntry" ajax="false" value="Yearly Budget Entry" rendered="#{LoginBean.hasPermission('Setup Entry')}"/>
+			<p:menuitem action="monthlyBudgetEntry" ajax="false" value="Monthly Budget Entry" />
+			<p:menuitem action="monthlyBudgetEntry(homeCurrency)" ajax="false" value="Monthly Budget Entry(Home Currency)" />
+			</p:submenu>
+			
+			<p:menuitem action="reportFormatEntry" ajax="false" value="Report Format Entry" rendered="#{LoginBean.hasPermission('Setup Entry')}"/>
+			<p:menuitem action="allocateCodeEntry" ajax="false"  value="Allocate Code Entry" rendered="#{LoginBean.hasPermission('Setup Entry')}"/>
+			<!-- <p:menuitem action="exchangeConfig" ajax="false"  value="Gain And Loss Configuration" rendered="#{LoginBean.hasPermission('Setup Entry')}"/> -->
+			<p:submenu label="System Setup" rendered="#{LoginBean.hasPermission('Setup Entry')}">
+			<p:menuitem action="branchEntry" ajax="false"  value="Branch Entry" />
+			<p:menuitem action="userEntry" ajax="false" value="User Entry" />
+			<p:menuitem action="roleEntry" ajax="false"  value="Role Entry" />
+			</p:submenu>
+			</p:submenu>
+			
+			<p:submenu label="Transaction Entry" rendered="#{LoginBean.hasPermission('Transaction Entry')}">
+			<p:menuitem action="creditVoucher" ajax="false" value="Credit Voucher" />
+			<p:menuitem action="debitVoucher" ajax="false" value="Debit Voucher" />
+			<p:menuitem action="journalVoucher" ajax="false" value="Journal Voucher" />
+			<p:menuitem action="voucherEdit" ajax="false" value="Voucher Edit" />
+			</p:submenu>
+			<p:submenu label="Enquiry" rendered="#{LoginBean.hasPermission('Enquiry')}">
+			<p:menuitem action="enquiryOnLedger" ajax="false" value="Enquiry On Ledger" />
+			</p:submenu>
+			<p:submenu label="Listing" rendered="#{LoginBean.hasPermission('Listing')}">
+			<p:menuitem action="vocherListing" ajax="false"  value="Voucher Listing" />
+			<p:menuitem action="accountLedgerListing" ajax="false" value="Account Ledger Listing" />
+			<p:menuitem action="generalLedgerListing" ajax="false" value="General Ledger Listing" />
+			<p:menuitem action="generalLedgerSummaryListing" ajax="false" value="General Ledger Summary &amp; Details Listing" />
+			<p:menuitem action="cashBookListing" ajax="false" value="Cash Book Listing" />
+			<p:menuitem action="coaListing" ajax="false" value="COA Listing" />
+			<p:menuitem action="voucherPrinting" ajax="false"  value="Voucher Printing" />
+			</p:submenu>
+			<p:submenu label="Posting" rendered="#{LoginBean.hasPermission('Posting')}">
+			<p:menuitem action="dailyPosting" ajax="false"  value="Daily Posting" />
+			<p:menuitem action="yearlyPosting" ajax="false" value="Yearly Posting" />
+			</p:submenu>
+			<p:submenu label="Reports" rendered="#{LoginBean.hasPermission('Reports')}">
+			<p:menuitem action="dayBook" ajax="false" value="Day Book" />
+			<p:menuitem action="bankCash" ajax="false" value="Bank Cash" />
+			<p:menuitem action="cleanCash" ajax="false" value="Clean Cash" />
+			<p:menuitem action="trialBalance" ajax="false" value="Trial Balance" />
+			<p:menuitem action="incomeAndExpenditure" ajax="false"  value="Income and Expenditure" />
+			<!-- <p:menuitem action="balanceSheet" ajax="false" value="Multi Spreadsheet Sheet Report" /> -->
+			<p:menuitem action="reportStatement" ajax="false" value="Report Statement" />
+			<p:menuitem action="costAllocation" ajax="false" value="Cost Allocation" />
+			<!-- <p:menuitem action="rateDifference" ajax="false" value="Rate Difference" /> -->
+			</p:submenu>
+		</p:menubar>
+	</h:form>
+</ui:composition>
